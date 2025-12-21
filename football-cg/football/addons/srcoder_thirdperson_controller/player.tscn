@@ -1,55 +1,38 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgaexk2mqn6j8"]
+[gd_scene load_steps=6 format=3 uid="uid://dgaexk2mqn6j8"]
 
 [ext_resource type="Script" uid="uid://c4o8dg1xks24f" path="res://addons/srcoder_thirdperson_controller/assets/player.gd" id="1_4s81h"]
-[ext_resource type="PackedScene" uid="uid://ccf670c6bkob8" path="res://addons/srcoder_thirdperson_controller/assets/character-male-e.glb" id="1_jt3wm"]
 [ext_resource type="Script" uid="uid://0n5mvxdf4twm" path="res://addons/srcoder_thirdperson_controller/assets/camera_pivot.gd" id="3_0ffrl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_71pwh"]
-radius = 0.274773
-height = 0.721095
+radius = 0.3725586
+height = 1.0460944
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_exdnv"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6sduc"]
-size = Vector3(1, 0.7802429, 1)
+[sub_resource type="SphereShape3D" id="SphereShape3D_gsgtm"]
 
-[node name="Player" type="CharacterBody3D" unique_id=330477483]
+[node name="Player" type="CharacterBody3D"]
 collision_layer = 3
 collision_mask = 5
 script = ExtResource("1_4s81h")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=916887433]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.358072, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5205717, 0.108994156)
 shape = SubResource("CapsuleShape3D_71pwh")
 
-[node name="camera_pivot" type="Node3D" parent="." unique_id=102975430]
+[node name="camera_pivot" type="Node3D" parent="."]
 script = ExtResource("3_0ffrl")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="camera_pivot" unique_id=2027659852]
+[node name="SpringArm3D" type="SpringArm3D" parent="camera_pivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.512907, 0)
 shape = SubResource("SeparationRayShape3D_exdnv")
-spring_length = 3.0
+spring_length = 6.0
 
-[node name="Camera3D" type="Camera3D" parent="camera_pivot/SpringArm3D" unique_id=1065105604]
+[node name="Camera3D" type="Camera3D" parent="camera_pivot/SpringArm3D"]
 
-[node name="playermodel" type="Node3D" parent="." unique_id=1356777248]
+[node name="Kick_area" type="Area3D" parent="."]
 
-[node name="character-male-e2" parent="playermodel" unique_id=1426156020 instance=ExtResource("1_jt3wm")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.0071882, 0)
-
-[node name="Skeleton3D" parent="playermodel/character-male-e2/character-male-e" parent_id_path=PackedInt32Array(1426156020, 1820513910) index="0" unique_id=2021195078]
-bones/1/position = Vector3(0.0791, 0.221, -0.0867)
-bones/1/rotation = Quaternion(0.6087615, 0, 0, 0.7933534)
-bones/2/position = Vector3(-0.0761, 0.22, -0.009)
-bones/2/rotation = Quaternion(-0.3826835, 0, 0, 0.92387956)
-bones/4/rotation = Quaternion(0, 0, 0.1305262, 0.9914449)
-bones/5/rotation = Quaternion(0, 0, -0.1305262, 0.9914449)
-
-[node name="Kick_area" type="Area3D" parent="." unique_id=341857067]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Kick_area" unique_id=361175790]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37193775, 0)
-shape = SubResource("BoxShape3D_6sduc")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Kick_area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0061035156, 0.53145015, 0.079108536)
+shape = SubResource("SphereShape3D_gsgtm")
 debug_color = Color(0.5686275, 0.5686275, 0, 1)
-
-[editable path="playermodel/character-male-e2"]

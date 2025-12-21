@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://ipqmnpjp3fsl"]
+
+[ext_resource type="Script" uid="uid://dh210yogd5esf" path="res://ball/ball.gd" id="1_6plaf"]
+[ext_resource type="PackedScene" uid="uid://bw3acilr57l21" path="res://ASSETS/3D/KayKit Mini-Game Variety Pack 1.2/Models/fbx/ball_teamRed.fbx" id="2_pwunn"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_biv8x"]
+bounce = 1.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pwunn"]
+
+[node name="Ball" type="RigidBody3D"]
+collision_layer = 3
+collision_mask = 3
+mass = 0.45
+physics_material_override = SubResource("PhysicsMaterial_biv8x")
+continuous_cd = true
+linear_damp = 0.01
+angular_damp = 0.05
+script = ExtResource("1_6plaf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_pwunn")
+
+[node name="ball_teamRed" parent="." instance=ExtResource("2_pwunn")]

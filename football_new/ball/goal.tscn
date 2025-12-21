@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy0p7tpup1xak"]
+
+[ext_resource type="Script" uid="uid://ofey1l87386c" path="res://ball/goal.gd" id="1_mvo7u"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mvo7u"]
+radius = 2.0
+
+[node name="goal" type="Area3D"]
+script = ExtResource("1_mvo7u")
+
+[node name="Label3D" type="Label3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_mvo7u")
+debug_color = Color(0, 0.6392157, 0.34901962, 1)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -32,11 +32,15 @@ Shortcuts/density_decrement=Object(Shortcut,"resource_local_to_scene":false,"res
 ],"script":null)
 
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="football"
 run/main_scene="uid://df2rhaqik2bo7"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [audio]

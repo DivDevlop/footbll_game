@@ -62,15 +62,6 @@ func _physics_process(delta: float) -> void:
 		player_animation_state = animation_state.JUMPING
 	
 	move_and_slide()
-	#tell the playeranimationcontroller about the animation state
-	match player_animation_state:
-		animation_state.IDLE:
-			animation_player.play("idle")
-		animation_state.RUNNING:
-			animation_player.play("sprint")
-		animation_state.JUMPING:
-			animation_player.play("jump")
-
 
 
 
