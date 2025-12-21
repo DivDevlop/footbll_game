@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6v1k0hksky34"]
+
+[ext_resource type="Script" uid="uid://c6h72ppiid5uk" path="res://scens/goal_area.gd" id="1_6b11a"]
+[ext_resource type="Texture2D" uid="uid://bol7t8t6c748b" path="res://proto_textures/orange/texture_01.png" id="2_1liro"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hkn2x"]
+size = Vector3(1, 2.7143555, 4.092987)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nwnmy"]
+albedo_texture = ExtResource("2_1liro")
+uv1_triplanar = true
+
+[node name="Goal_area" type="Area3D" unique_id=678604426]
+script = ExtResource("1_6b11a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2001675526]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.309858, -0.033859253)
+shape = SubResource("BoxShape3D_hkn2x")
+debug_color = Color(0, 0.6201824, 0.57145053, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=2025683526]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008544922, 0.41611695, -1.021369)
+material_override = SubResource("StandardMaterial3D_nwnmy")
+size = Vector3(0.09814453, 2.1669922, 0.08984375)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1535308767]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008544922, 0.41611695, 1.041548)
+material_override = SubResource("StandardMaterial3D_nwnmy")
+size = Vector3(0.09814453, 2.1669922, 0.08984375)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=722331803]
+transform = Transform3D(0.778966, -0.6270662, 0, 0.6270662, 0.778966, 0, 0, 0, 1, 0.9040214, 0.3895506, -1.021369)
+material_override = SubResource("StandardMaterial3D_nwnmy")
+size = Vector3(0.09814453, 2.8754883, 0.08984375)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=848084176]
+transform = Transform3D(0.778966, -0.6270662, 0, 0.6270662, 0.778966, 0, 0, 0, 1, 0.9090734, 0.38327473, 1.041548)
+material_override = SubResource("StandardMaterial3D_nwnmy")
+size = Vector3(0.09814453, 2.8916016, 0.08984375)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=264897961]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008125305, 1.5391557, 0.02268815)
+material_override = SubResource("StandardMaterial3D_nwnmy")
+size = Vector3(0.25538635, 0.15802002, 2.279663)
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1433008253]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.305087, 0)
+billboard = 1
+text = "player"
+font_size = 164
+outline_size = 76
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

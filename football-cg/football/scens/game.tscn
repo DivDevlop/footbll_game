@@ -1,0 +1,105 @@
+[gd_scene load_steps=16 format=3 uid="uid://df2rhaqik2bo7"]
+
+[ext_resource type="Texture2D" uid="uid://dadifgcm4gjkr" path="res://proto_textures/green/texture_01.png" id="1_ulfje"]
+[ext_resource type="Texture2D" uid="uid://bspoy6qr8q6je" path="res://proto_textures/light/texture_01.png" id="1_vfjwf"]
+[ext_resource type="Texture2D" uid="uid://bkey1qy8it6my" path="res://proto_textures/texture_01_normal.png" id="2_xahwf"]
+[ext_resource type="PackedScene" uid="uid://c31q27kbtexcw" path="res://scens/player-controller/player.tscn" id="3_xahwf"]
+[ext_resource type="PackedScene" uid="uid://eirbtlb3krsw" path="res://scens/ball.tscn" id="4_3an71"]
+[ext_resource type="PackedScene" uid="uid://c6v1k0hksky34" path="res://scens/goal_area.tscn" id="6_gpwcj"]
+[ext_resource type="PackedScene" uid="uid://jooa1aarwvat" path="res://scens/player-controller/player_ai.tscn" id="7_i34al"]
+[ext_resource type="PackedScene" uid="uid://dgaexk2mqn6j8" path="res://addons/srcoder_thirdperson_controller/player.tscn" id="8_0sdli"]
+[ext_resource type="PackedScene" uid="uid://bqq0svy5fwdin" path="res://addons/srcoder_thirdperson_controller/mouse_lock.tscn" id="9_x436v"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3an71"]
+sky_top_color = Color(0.6211455, 0.6857341, 0.7721131, 1)
+sky_horizon_color = Color(0.91457415, 0.92297137, 0.93556607, 1)
+ground_horizon_color = Color(0.91457415, 0.92297137, 0.93556607, 1)
+
+[sub_resource type="Sky" id="Sky_vfjwf"]
+sky_material = SubResource("ProceduralSkyMaterial_3an71")
+
+[sub_resource type="Environment" id="Environment_gpwcj"]
+background_mode = 1
+background_color = Color(0.0627451, 0, 0.0627451, 1)
+sky = SubResource("Sky_vfjwf")
+tonemap_mode = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gpwcj"]
+albedo_texture = ExtResource("1_vfjwf")
+normal_enabled = true
+normal_texture = ExtResource("2_xahwf")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i34al"]
+albedo_color = Color(0.70796657, 0.7079665, 0.7079665, 1)
+albedo_texture = ExtResource("1_ulfje")
+normal_enabled = true
+normal_texture = ExtResource("2_xahwf")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_drqnf"]
+albedo_texture = ExtResource("1_ulfje")
+normal_enabled = true
+normal_texture = ExtResource("2_xahwf")
+uv1_triplanar = true
+
+[node name="game" type="Node3D" unique_id=1557144831]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=125964408]
+environment = SubResource("Environment_gpwcj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1553491785]
+transform = Transform3D(0.8875181, -0.39904103, 0.23038638, 2.7805946e-08, 0.49999994, 0.86602545, -0.4607729, -0.7686133, 0.44375896, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_mode = 0
+sky_mode = 1
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=19764335]
+material_override = SubResource("StandardMaterial3D_gpwcj")
+use_collision = true
+size = Vector3(100, 1, 100)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1600060453]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12042236, 0.13023925, -0.09082031)
+material_override = SubResource("StandardMaterial3D_i34al")
+size = Vector3(21.472046, 0.754, 11.888672)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=571274259]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16651407, 0)
+material_override = SubResource("StandardMaterial3D_drqnf")
+size = Vector3(20, 0.7938701, 10)
+
+[node name="main_objects" type="Node3D" parent="." unique_id=589375074]
+
+[node name="Player" parent="main_objects" unique_id=2140031457 node_paths=PackedStringArray("ai_goal") instance=ExtResource("3_xahwf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.331736, 0.3713255, 0.09493065)
+ai_goal = NodePath("../PlayerGoal")
+
+[node name="Ball" parent="main_objects" unique_id=310994004 node_paths=PackedStringArray("ai_goal") instance=ExtResource("4_3an71")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4535046, 0)
+ai_goal = NodePath("../PlayerGoal")
+
+[node name="Goal_area" parent="main_objects" unique_id=678604426 node_paths=PackedStringArray("respawn_position") instance=ExtResource("6_gpwcj")]
+transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, 8.852431, 0.5839727, 0)
+side = "for bot"
+respawn_position = NodePath("../Respawn_position")
+
+[node name="PlayerGoal" parent="main_objects" unique_id=1411516720 node_paths=PackedStringArray("respawn_position") instance=ExtResource("6_gpwcj")]
+transform = Transform3D(-0.99999964, 0, 8.742274e-08, 0, 1, 0, -8.742274e-08, 0, -0.99999964, -8.304496, 0.5839727, 0)
+goal_side = 1
+side = "for you"
+respawn_position = NodePath("../Respawn_position")
+
+[node name="Respawn_position" type="Node3D" parent="main_objects" unique_id=1636867264]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3030133, 0)
+
+[node name="Player_AI" parent="main_objects" unique_id=833109234 node_paths=PackedStringArray("ball", "player_goal", "ai_goal") groups=["AI"] instance=ExtResource("7_i34al")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.3054415, 0.05093193)
+ball = NodePath("../Ball")
+player_goal = NodePath("../Goal_area")
+ai_goal = NodePath("../PlayerGoal")
+
+[node name="Player" parent="." unique_id=330477483 instance=ExtResource("8_0sdli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1, 22)
+
+[node name="MouseLock" parent="Player" unique_id=61218480 instance=ExtResource("9_x436v")]

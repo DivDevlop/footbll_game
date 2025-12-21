@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://jooa1aarwvat"]
+
+[ext_resource type="Script" uid="uid://bq8kgpcgvlcor" path="res://scens/player-controller/player_ai.gd" id="1_m60cn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dexnn"]
+radius = 0.4
+height = 1.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m60cn"]
+albedo_color = Color(1, 0.39607844, 0.3372549, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ro5gy"]
+radius = 0.4
+height = 1.6
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ro5gy"]
+size = Vector3(1, 0.51068115, 1)
+
+[node name="Player_AI" type="CharacterBody3D" unique_id=2140031457 node_paths=PackedStringArray("kick_area")]
+script = ExtResource("1_m60cn")
+difficulty = 0
+kick_area = NodePath("Kick_area")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=206478301]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_dexnn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=150415532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_m60cn")
+mesh = SubResource("CapsuleMesh_ro5gy")
+
+[node name="Kick_area" type="Area3D" parent="." unique_id=222000829]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Kick_area" unique_id=1193689448]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50671864, 0)
+shape = SubResource("BoxShape3D_ro5gy")
+debug_color = Color(0.5686275, 0.5686275, 0, 1)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Kick_area" unique_id=1100223946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5221288, 0)
+shape = SubResource("BoxShape3D_ro5gy")
+debug_color = Color(0.5686275, 0.5686275, 0, 1)
