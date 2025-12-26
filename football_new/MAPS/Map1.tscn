@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://d2037kda7mmbj"]
+[gd_scene load_steps=21 format=4 uid="uid://d2037kda7mmbj"]
 
 [ext_resource type="PackedScene" uid="uid://7ah0fr7rffq6" path="res://ASSETS/3D/KayKit Mini-Game Variety Pack 1.2/Models/fbx/gateSmall_teamRed.fbx" id="1_dostr"]
 [ext_resource type="PackedScene" uid="uid://c5d288l7dnm27" path="res://ASSETS/3D/KayKit Mini-Game Variety Pack 1.2/Models/fbx/gateSmall_teamBlue.fbx" id="2_rcyb5"]
@@ -8,20 +8,35 @@
 [ext_resource type="PackedScene" uid="uid://cy0p7tpup1xak" path="res://ball/goal.tscn" id="6_5e5it"]
 [ext_resource type="PackedScene" uid="uid://cg4j7p4lj1bq2" path="res://PLAYER/ai/ai_player.tscn" id="7_a7ycl"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rcyb5"]
-sky_top_color = Color(0.31742454, 0.72029126, 1, 1)
-sky_horizon_color = Color(0.96303666, 1.1912502, 1.2754496, 1)
-ground_bottom_color = Color(0, 0.5099874, 0.56707656, 1)
-ground_horizon_color = Color(0.96303666, 1.1912502, 1.2754496, 1)
+[sub_resource type="Gradient" id="Gradient_5e5it"]
+offsets = PackedFloat32Array(0, 0.39285713)
+colors = PackedColorArray(1.3957917e-06, 0, 0.59520364, 1, 0.2033942, 0.64289576, 0.9845682, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a7ycl"]
+gradient = SubResource("Gradient_5e5it")
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_4m82u"]
+panorama = SubResource("GradientTexture2D_a7ycl")
 
 [sub_resource type="Sky" id="Sky_ts1mu"]
-sky_material = SubResource("ProceduralSkyMaterial_rcyb5")
+sky_material = SubResource("PanoramaSkyMaterial_4m82u")
+radiance_size = 1
 
 [sub_resource type="Environment" id="Environment_blfro"]
-background_mode = 2
+background_mode = 1
+background_color = Color(0.31321016, 0.52206707, 1, 1)
 sky = SubResource("Sky_ts1mu")
 tonemap_mode = 2
 glow_enabled = true
+glow_bloom = 0.6
+fog_mode = 1
+fog_light_color = Color(0.10972138, 0.22531533, 0.3029058, 1)
+fog_density = 1.0
+adjustment_enabled = true
+adjustment_contrast = 1.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dkgq7"]
 resource_name = "Yellow"
@@ -117,6 +132,7 @@ environment = SubResource("Environment_blfro")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
+directional_shadow_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("3_rcyb5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.126393, 18.96)
