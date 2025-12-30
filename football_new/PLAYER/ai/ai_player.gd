@@ -25,13 +25,13 @@ func _ready() -> void:
 			kick_force = 5.0
 			reaction_time = 0.6
 		Difficulty.MEDIUM:
-			speed = 6.0
-			kick_force = 7.0
-			reaction_time = 0.4
-		Difficulty.HARD:
 			speed = 8.0
-			kick_force = 8.5
+			kick_force = 7.0
 			reaction_time = 0.2
+		Difficulty.HARD:
+			speed = 15.0
+			kick_force = 8.5
+			reaction_time = 0.1
 	target_position = global_position
 
 func _physics_process(delta: float) -> void:
@@ -83,11 +83,11 @@ func _physics_process(delta: float) -> void:
 			var hard_kick_chance: float
 			match difficulty:
 				Difficulty.EASY:
-					hard_kick_chance = 0.05
+					hard_kick_chance = 0.2
 				Difficulty.MEDIUM:
-					hard_kick_chance = 0.15
+					hard_kick_chance = 0.5
 				Difficulty.HARD:
-					hard_kick_chance = 0.25
+					hard_kick_chance = 0.8
 
 			var force = kick_force * accuracy
 			if randf() < hard_kick_chance:

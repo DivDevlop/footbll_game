@@ -24,11 +24,19 @@ var player_animation_state : animation_state = animation_state.IDLE
 @export var ai_goal: Node3D  # assign in Inspector
 @export var hard_kick_action: String = "hard_kick"  # input map action
 
+#sfx
+@onready var footstep: AudioStreamPlayer = $audio/footstep
+@onready var kick: AudioStreamPlayer = $audio/kick
 
+@export var footstep_interval := 0.45  # time between steps
+
+var footstep_timer := 0.0
 
 
 
 func _physics_process(delta: float) -> void:
+	handle_footstep_timer(delta)
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -74,6 +82,8 @@ func _physics_process(delta: float) -> void:
 	for body in kick_area.get_overlapping_bodies():
 		if body is RigidBody3D and body.name == "Ball":
 			var force = kick_force
+			play_kick_sound(force)
+
 			if Input.is_action_pressed(hard_kick_action):
 				force *= hard_kick_multiplier
 
@@ -82,12 +92,39 @@ func _physics_process(delta: float) -> void:
 			body.player_assist = player_assist  # sync slider/easiness
 
 
-
-
-
-
-
-
 func rotate_model(direction: Vector3, delta : float) -> void:
 	#rotate the model to match the springarm
 	playermodel.basis = lerp(playermodel.basis, Basis.looking_at(direction), 10.0 * delta)
+
+
+
+
+
+
+
+
+#sfx
+
+func play_footstep() -> void:
+	if player_animation_state != animation_state.RUNNING:
+		return
+	if not is_on_floor():
+		return
+
+	footstep.pitch_scale = randf_range(0.95, 1.05)
+	footstep.play()
+
+func handle_footstep_timer(delta: float) -> void:
+	if player_animation_state == animation_state.RUNNING and is_on_floor():
+		footstep_timer -= delta
+		if footstep_timer <= 0.0:
+			play_footstep()
+			footstep_timer = footstep_interval
+	else:
+		footstep_timer = 0.0
+
+
+func play_kick_sound(force: float) -> void:
+	var pitch: float = clamp(1.2 - (force / 10.0), 0.85, 1.2)
+	kick.pitch_scale = pitch
+	kick.play()

@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://dr0685pd0eox0"]
+
+[ext_resource type="Script" uid="uid://c3mignmhuvvq4" path="res://addons/maaacks_game_template/base/nodes/menus/options_menu/paginated_tab_container.gd" id="1_ovaiu"]
+[ext_resource type="PackedScene" uid="uid://dplwgwwcjqdhs" path="res://menues/scenes/menus/options_menu/input/input_options_menu.tscn" id="2_74o6d"]
+[ext_resource type="PackedScene" uid="uid://daygn3fh0f2ud" path="res://menues/scenes/menus/options_menu/input/input_extras_menu.tscn" id="3_jjnkk"]
+[ext_resource type="PackedScene" uid="uid://81l8jtof7tar" path="res://menues/scenes/menus/options_menu/audio/audio_options_menu.tscn" id="4_33y2w"]
+[ext_resource type="PackedScene" uid="uid://bgy3yd68afr77" path="res://menues/scenes/menus/options_menu/video/video_options_menu_with_extras.tscn" id="5_8hwew"]
+[ext_resource type="PackedScene" uid="uid://cuim1p0fvlu8v" path="res://menues/scenes/menus/options_menu/game/game_options_menu.tscn" id="6_3tksb"]
+
+[node name="MasterOptionsMenu" type="TabContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+current_tab = 0
+script = ExtResource("1_ovaiu")
+
+[node name="Controls" parent="." instance=ExtResource("2_74o6d")]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Inputs" parent="." instance=ExtResource("3_jjnkk")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Audio" parent="." instance=ExtResource("4_33y2w")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Video" parent="." instance=ExtResource("5_8hwew")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="Game" parent="." instance=ExtResource("6_3tksb")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4

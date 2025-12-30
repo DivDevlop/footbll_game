@@ -1,8 +1,12 @@
-[gd_scene load_steps=22 format=4 uid="uid://dgaexk2mqn6j8"]
+[gd_scene load_steps=26 format=4 uid="uid://dgaexk2mqn6j8"]
 
 [ext_resource type="Script" uid="uid://mhx5it4ix3jx" path="res://PLAYER/assets/player.gd" id="1_4s81h"]
+[ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://addons/maaacks_game_template/base/nodes/utilities/pause_menu_controller.gd" id="2_gvfuq"]
 [ext_resource type="Script" uid="uid://ch8takq8w281q" path="res://PLAYER/assets/camera_pivot.gd" id="3_0ffrl"]
 [ext_resource type="PackedScene" uid="uid://bqq0svy5fwdin" path="res://PLAYER/mouse_lock.tscn" id="3_6i24g"]
+[ext_resource type="PackedScene" uid="uid://sfqhf3hbkucq" path="res://menues/scenes/windows/pause_menu_layer.tscn" id="3_d1135"]
+[ext_resource type="AudioStream" uid="uid://culi50jwskloe" path="res://ASSETS/sfx-music/footstep.ogg" id="6_yrfig"]
+[ext_resource type="AudioStream" uid="uid://g1f4jsklt36s" path="res://ASSETS/sfx-music/kick.ogg" id="7_45mp0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gvfuq"]
 height = 1.7194824
@@ -469,6 +473,12 @@ speed = 8.0
 jump_velocity = 6.0
 kick_force = 8.0
 
+[node name="PauseMenuController" type="Node" parent="."]
+script = ExtResource("2_gvfuq")
+pause_menu_packed = ExtResource("3_d1135")
+
+[node name="MouseLock" parent="." instance=ExtResource("3_6i24g")]
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.791934, 0)
 shape = SubResource("CapsuleShape3D_gvfuq")
@@ -514,8 +524,6 @@ libraries = {
 }
 autoplay = "idel"
 
-[node name="MouseLock" parent="." instance=ExtResource("3_6i24g")]
-
 [node name="kick_area" type="Area3D" parent="."]
 collision_layer = 3
 collision_mask = 5
@@ -524,6 +532,18 @@ collision_mask = 5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78480387, -0.15105605)
 shape = SubResource("SphereShape3D_6i24g")
 debug_color = Color(0.67058825, 0.50980395, 0, 1)
+
+[node name="audio" type="Node" parent="."]
+
+[node name="footstep" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("6_yrfig")
+volume_db = -10.0
+mix_target = 2
+
+[node name="kick" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("7_45mp0")
+volume_db = -8.0
+mix_target = 2
 
 [connection signal="body_entered" from="kick_area" to="." method="_on_kick_area_body_entered"]
 [connection signal="body_exited" from="kick_area" to="." method="_on_kick_area_body_exited"]
